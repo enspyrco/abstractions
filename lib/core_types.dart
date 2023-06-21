@@ -66,7 +66,7 @@ abstract class SystemChecks {
 abstract class PageGenerator {
   void add(
       {required Type type,
-      required MaterialPage Function(PageState) generator});
+      required MaterialPage<dynamic> Function(PageState) generator});
 
-  MaterialPage applyTo(PageState state);
+  MaterialPage<dynamic> applyTo(PageState state);
 }

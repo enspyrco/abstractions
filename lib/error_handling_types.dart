@@ -1,6 +1,5 @@
-import 'package:astro_types/state_types.dart';
-
 import 'core_types.dart';
+import 'state_types.dart';
 
 abstract class AppStateErrorHandling {
   abstract final ErrorHandlingState error;
