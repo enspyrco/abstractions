@@ -1,4 +1,4 @@
-library astro_types;
+library types_for_perception;
 
 import 'package:flutter/material.dart';
 

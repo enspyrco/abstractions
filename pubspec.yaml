@@ -1,4 +1,4 @@
-name: astro_types
+name: types_for_perception
 description: Interfaces implemented in astro and used as types in apps using astro.
 version: 0.0.0-a1
 publish_to: none

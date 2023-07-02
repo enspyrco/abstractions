@@ -1,4 +1,4 @@
-# astro_types
+# types_for_perception
 
 Interfaces implemented in astro and used as types in apps using astro.
 
@@ -14,7 +14,7 @@ The purpose of the package is:
 ### Public libraries
 
 Each dart file directly under `lib/` is a public library that any package using
-`astro_types` can import.
+`types_for_perception` can import.
 
 ### Annotations
 
