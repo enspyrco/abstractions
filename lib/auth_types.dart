@@ -1,4 +1,5 @@
-import 'json_types.dart';
+import 'package:json_utils/json_utils.dart';
+
 import 'state_types.dart';
 
 abstract class AppStateAuth {
@@ -6,7 +7,7 @@ abstract class AppStateAuth {
 }
 
 /// [AuthState] is a state section, being the state object of a plugin, in this case
-/// the astro_auth plugin. Currently the section only holds the user's auth state
+/// the auth_for_perception plugin. Currently the section only holds the user's auth state
 /// in a single [UserAuthState] member, but the section may expand over time.
 abstract class AuthState implements AstroState {
   UserAuthState get user;

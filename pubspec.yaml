@@ -1,5 +1,5 @@
 name: types_for_perception
-description: Interfaces implemented in astro and used as types in apps using astro.
+description: Interfaces implemented in the core_of_perception and used as types in apps using perception.
 version: 0.0.0-a1
 publish_to: none
 
@@ -10,7 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
   meta: ^1.9.1
+  
+  json_utils: ^0.0.0-a1
 
 dev_dependencies:
   flutter_test:

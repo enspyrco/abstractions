@@ -1,6 +1,5 @@
+import 'package:json_utils/json_utils.dart';
 import 'package:meta/meta.dart';
-
-import 'json_types.dart';
 
 @immutable
 abstract class AstroState {

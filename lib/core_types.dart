@@ -1,8 +1,8 @@
 library types_for_perception;
 
 import 'package:flutter/material.dart';
+import 'package:json_utils/json_utils.dart';
 
-import 'json_types.dart';
 import 'navigation_types.dart';
 import 'state_types.dart';
 
