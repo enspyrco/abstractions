@@ -4,7 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:json_utils/json_utils.dart';
 
 import 'navigation_types.dart';
-import 'state_types.dart';
+
+@immutable
+abstract class Belief {
+  const Belief();
+
+  Belief copyWith();
+  Json toJson();
+}
+
+abstract class CoreBeliefs {
+  const CoreBeliefs();
+
+  CoreBeliefs copyWith();
+  Json toJson();
+}
 
 /// All missions must extend either [AwayMission] or [LandingMission], which
 /// both inherit from [Mission].
@@ -13,18 +27,18 @@ abstract class Mission {
   JsonMap toJson();
 }
 
-abstract class LandingMission<T extends AstroState> extends Mission {
+abstract class LandingMission<T extends CoreBeliefs> extends Mission {
   const LandingMission();
   T landingInstructions(T state);
 }
 
-abstract class AwayMission<T extends AstroState> extends Mission {
+abstract class AwayMission<T extends CoreBeliefs> extends Mission {
   const AwayMission();
   Future<void> flightPlan(MissionControl<T> missionControl);
 }
 
 ///
-abstract class MissionControl<T extends AstroState> {
+abstract class MissionControl<T extends CoreBeliefs> {
   T get state;
   void land(LandingMission<T> mission);
   Future<void> launch(AwayMission<T> mission);
@@ -46,12 +60,12 @@ abstract class MissionControl<T extends AstroState> {
 ///
 /// When multiple system checks are added to [MissionControl], they are called
 /// in the order they were added to the [MissionControl.systemChecks] list.
-abstract class SystemCheck<S extends AstroState> {
+abstract class SystemCheck<S extends CoreBeliefs> {
   const SystemCheck();
   void call(MissionControl<S> missionControl, Mission mission);
 }
 
-abstract class AstroProvider<S extends AstroState> {}
+abstract class AstroProvider<S extends CoreBeliefs> {}
 
 abstract class SystemChecks {
   abstract final List<SystemCheck> preLaunch;

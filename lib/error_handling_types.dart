@@ -1,5 +1,4 @@
-import 'core_types.dart';
-import 'state_types.dart';
+import 'beliefs.dart';
 
 abstract class AppStateErrorHandling {
   abstract final ErrorHandlingState error;
@@ -28,7 +27,7 @@ abstract class ErrorReport {
   abstract final Map<String, String>? details;
 }
 
-abstract class ErrorHandlers<S extends AstroState> {
+abstract class ErrorHandlers<S extends CoreBeliefs> {
   void handleLaunchError({
     required Object thrown,
     required StackTrace trace,

@@ -12,7 +12,8 @@ dependencies:
     sdk: flutter
   
   meta: ^1.9.1
-  
+
+  types_for_auth: ^0.0.0-a1
   json_utils: ^0.0.0-a1
 
 dev_dependencies:
