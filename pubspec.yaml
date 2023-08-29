@@ -1,5 +1,5 @@
-name: types_for_perception
-description: Interfaces implemented in the core_of_perception and used as types in apps using perception.
+name: abstractions
+description: Interfaces implemented in the percepts and used as types in apps using perception.
 version: 0.0.0-a1
 publish_to: none
 

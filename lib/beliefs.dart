@@ -1,9 +1,9 @@
-library types_for_perception;
+library abstractions;
 
 import 'package:flutter/material.dart';
 import 'package:json_utils/json_utils.dart';
 
-import 'navigation_types.dart';
+import 'framing.dart';
 
 @immutable
 abstract class Belief {
@@ -20,67 +20,67 @@ abstract class CoreBeliefs {
   Json toJson();
 }
 
-/// All missions must extend either [AwayMission] or [LandingMission], which
-/// both inherit from [Mission].
-abstract class Mission {
-  const Mission();
+/// All missions must extend either [Consideration] or [Conclusion], which
+/// both inherit from [Cognition].
+abstract class Cognition {
+  const Cognition();
   JsonMap toJson();
 }
 
-abstract class LandingMission<T extends CoreBeliefs> extends Mission {
-  const LandingMission();
-  T landingInstructions(T state);
+abstract class Conclusion<T extends CoreBeliefs> extends Cognition {
+  const Conclusion();
+  T update(T beliefs);
 }
 
-abstract class AwayMission<T extends CoreBeliefs> extends Mission {
-  const AwayMission();
-  Future<void> flightPlan(MissionControl<T> missionControl);
+abstract class Consideration<T extends CoreBeliefs> extends Cognition {
+  const Consideration();
+  Future<void> process(BeliefSystem<T> beliefSystem);
 }
 
 ///
-abstract class MissionControl<T extends CoreBeliefs> {
+abstract class BeliefSystem<T extends CoreBeliefs> {
   T get state;
-  void land(LandingMission<T> mission);
-  Future<void> launch(AwayMission<T> mission);
-  Stream<T> get onStateChange;
+  void conclude(Conclusion<T> mission);
+  Future<void> consider(Consideration<T> mission);
+  Stream<T> get onBeliefUpdate;
 }
 
-/// [SystemCheck]s in astro are are called for every [Mission] - before
-/// [AwayMission.flightPlan] is called and after [LandingMission.landingInstructions]
+/// [Habit]s in astro are are called for every [Cognition] - before
+/// [Consideration.process] is called and after [Conclusion.update]
 /// is called.
 ///
-/// An [AwayMission] involves calling an async function ([AwayMission.flightPlan]),
+/// An [Consideration] involves calling an async function ([Consideration.process]),
 /// and we don’t know when that function will return, but we want to be able to
-/// do things when we first start the mission, so we run the [SystemCheck] first
-/// in [MissionControl.launch].
+/// do things when we first start the mission, so we run the [Habit] first
+/// in [BeliefSystem.consider].
 ///
 /// On the other hand, we always want to know what the new state is *after* a
-/// [LandingMission.landingInstructions] has run so we run the [SystemCheck]
-/// last in [MissionControl.land].
+/// [Conclusion.update] has run so we run the [Habit]
+/// last in [BeliefSystem.conclude].
 ///
-/// When multiple system checks are added to [MissionControl], they are called
-/// in the order they were added to the [MissionControl.systemChecks] list.
-abstract class SystemCheck<S extends CoreBeliefs> {
-  const SystemCheck();
-  void call(MissionControl<S> missionControl, Mission mission);
+/// When multiple system checks are added to [BeliefSystem], they are called
+/// in the order they were added to the [BeliefSystem.systemChecks] list.
+abstract class Habit<S extends CoreBeliefs> {
+  const Habit();
+  void call(BeliefSystem<S> beliefSystem, Cognition cognition);
 }
 
 abstract class AstroProvider<S extends CoreBeliefs> {}
 
-abstract class SystemChecks {
-  abstract final List<SystemCheck> preLaunch;
-  abstract final List<SystemCheck> postLaunch;
-  abstract final List<SystemCheck> preLand;
-  abstract final List<SystemCheck> postLand;
+abstract class Habits {
+  abstract final List<Habit> preConsideration;
+  abstract final List<Habit> postConsideration;
+  abstract final List<Habit> preConclusion;
+  abstract final List<Habit> postConclusion;
 }
 
 /// We setup navigation by adding a [PageGenerator] to the [Locator], that will be
-/// used to turn a [PageState] from [AppState.navigation.stack] into a [Page]
+/// used to turn a [FramingLayer] from [DomainBeliefs.framing.layers] into a [Page]
 /// that the [Navigator] will use to display a screen.
 abstract class PageGenerator {
   void add(
       {required Type type,
-      required MaterialPage<dynamic> Function(PageState) generator});
+      required MaterialPage<dynamic> Function(FramingLayer) generator});
 
-  MaterialPage<dynamic> applyTo(PageState state);
+  MaterialPage<dynamic> applyTo(FramingLayer layer);
 }

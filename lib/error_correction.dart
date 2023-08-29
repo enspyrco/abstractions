@@ -1,15 +1,15 @@
 import 'beliefs.dart';
 
-abstract class AppStateErrorHandling {
-  abstract final ErrorHandlingState error;
+abstract class ErrorCorrectionConcept {
+  abstract final ErrorCorrectionBeliefs error;
 }
 
-abstract class ErrorHandlingState {
+abstract class ErrorCorrectionBeliefs {
   abstract final List<ErrorReport> reports;
 }
 
 enum ErrorReportSettings {
-  fullReport('Please remain calm but...', true, true),
+  fullReport('We found a problem and...', true, true),
   infoMessage('Just letting you know...', false, false);
 
   final String reportTitle;
@@ -32,14 +32,14 @@ abstract class ErrorHandlers<S extends CoreBeliefs> {
     required Object thrown,
     required StackTrace trace,
     required ErrorReportSettings reportSettings,
-    required AwayMission mission,
-    required MissionControl missionControl,
+    required Consideration mission,
+    required BeliefSystem beliefSystem,
   });
   void handleLandingError({
     required Object thrown,
     required StackTrace trace,
     required ErrorReportSettings reportSettings,
-    required LandingMission mission,
-    required MissionControl missionControl,
+    required Conclusion mission,
+    required BeliefSystem beliefSystem,
   });
 }
