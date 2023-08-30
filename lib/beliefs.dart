@@ -29,33 +29,33 @@ abstract class Cognition {
 
 abstract class Conclusion<T extends CoreBeliefs> extends Cognition {
   const Conclusion();
-  T update(T beliefs);
+  T conclude(T beliefs);
 }
 
 abstract class Consideration<T extends CoreBeliefs> extends Cognition {
   const Consideration();
-  Future<void> process(BeliefSystem<T> beliefSystem);
+  Future<void> consider(BeliefSystem<T> beliefSystem);
 }
 
 ///
 abstract class BeliefSystem<T extends CoreBeliefs> {
   T get state;
-  void conclude(Conclusion<T> mission);
-  Future<void> consider(Consideration<T> mission);
+  void conclude(Conclusion<T> conclusion);
+  Future<void> consider(Consideration<T> consideration);
   Stream<T> get onBeliefUpdate;
 }
 
 /// [Habit]s in astro are are called for every [Cognition] - before
-/// [Consideration.process] is called and after [Conclusion.update]
+/// [Consideration.consider] is called and after [Conclusion.conclude]
 /// is called.
 ///
-/// An [Consideration] involves calling an async function ([Consideration.process]),
+/// An [Consideration] involves calling an async function ([Consideration.consider]),
 /// and we don’t know when that function will return, but we want to be able to
 /// do things when we first start the mission, so we run the [Habit] first
 /// in [BeliefSystem.consider].
 ///
 /// On the other hand, we always want to know what the new state is *after* a
-/// [Conclusion.update] has run so we run the [Habit]
+/// [Conclusion.conclude] has run so we run the [Habit]
 /// last in [BeliefSystem.conclude].
 ///
 /// When multiple system checks are added to [BeliefSystem], they are called
