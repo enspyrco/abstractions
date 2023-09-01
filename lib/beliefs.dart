@@ -39,7 +39,7 @@ abstract class Consideration<T extends CoreBeliefs> extends Cognition {
 
 ///
 abstract class BeliefSystem<T extends CoreBeliefs> {
-  T get state;
+  T get beliefs;
   void conclude(Conclusion<T> conclusion);
   Future<void> consider(Consideration<T> consideration);
   Stream<T> get onBeliefUpdate;
