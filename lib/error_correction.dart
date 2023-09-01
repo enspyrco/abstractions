@@ -5,41 +5,40 @@ abstract class ErrorCorrectionConcept {
 }
 
 abstract class ErrorCorrectionBeliefs {
-  abstract final List<ErrorReport> reports;
+  abstract final List<Feedback> reports;
 }
 
-enum ErrorReportSettings {
-  fullReport('We found a problem and...', true, true),
+enum FeedbackSettings {
+  detailedFeedback('We found a problem and...', true, true),
   infoMessage('Just letting you know...', false, false);
 
-  final String reportTitle;
+  final String title;
   final bool showStackTrace;
   final bool showDetails;
 
-  const ErrorReportSettings(
-      this.reportTitle, this.showStackTrace, this.showDetails);
+  const FeedbackSettings(this.title, this.showStackTrace, this.showDetails);
 }
 
-abstract class ErrorReport {
+abstract class Feedback {
   abstract final String message;
   abstract final String? trace;
-  abstract final ErrorReportSettings settings;
+  abstract final FeedbackSettings settings;
   abstract final Map<String, String>? details;
 }
 
 abstract class ErrorHandlers<S extends CoreBeliefs> {
-  void handleLaunchError({
+  void handleExceptionDuringConsideration({
     required Object thrown,
     required StackTrace trace,
-    required ErrorReportSettings reportSettings,
-    required Consideration mission,
+    required FeedbackSettings reportSettings,
+    required Consideration consideration,
     required BeliefSystem beliefSystem,
   });
-  void handleLandingError({
+  void handleErrorDuringConclusion({
     required Object thrown,
     required StackTrace trace,
-    required ErrorReportSettings reportSettings,
-    required Conclusion mission,
+    required FeedbackSettings reportSettings,
+    required Conclusion conclusion,
     required BeliefSystem beliefSystem,
   });
 }
