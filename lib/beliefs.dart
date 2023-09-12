@@ -20,7 +20,7 @@ abstract class CoreBeliefs {
   Json toJson();
 }
 
-/// All missions must extend either [Consideration] or [Conclusion], which
+/// All cognitions must extend either [Consideration] or [Conclusion], which
 /// both inherit from [Cognition].
 abstract class Cognition {
   const Cognition();
@@ -51,7 +51,7 @@ abstract class BeliefSystem<T extends CoreBeliefs> {
 ///
 /// An [Consideration] involves calling an async function ([Consideration.consider]),
 /// and we don’t know when that function will return, but we want to be able to
-/// do things when we first start the mission, so we run the [Habit] first
+/// do things when we first start the cognition, so we run the [Habit] first
 /// in [BeliefSystem.consider].
 ///
 /// On the other hand, we always want to know what the new state is *after* a
