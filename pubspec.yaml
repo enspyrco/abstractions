@@ -1,10 +1,10 @@
-name: types_for_perception
-description: Interfaces implemented in the core_of_perception and used as types in apps using perception.
+name: abstractions
+description: Interfaces implemented in the percepts and used as types in apps using perception.
 version: 0.0.0-a1
 publish_to: none
 
 environment:
-  sdk: '>=3.0.1 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
@@ -12,10 +12,14 @@ dependencies:
     sdk: flutter
   
   meta: ^1.9.1
-  
-  json_utils: ^0.0.0-a1
+
+  types_for_auth:
+    git: https://github.com/enspyrco/types_for_auth
+  json_utils:
+    git: https://github.com/enspyrco/json_utils
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  enspyr_lints: ^0.0.0-a1
+  enspyr_lints:
+    git: https://github.com/enspyrco/enspyr_lints

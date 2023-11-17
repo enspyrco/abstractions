@@ -1,4 +1,4 @@
-# types_for_perception
+# abstractions
 
 Interfaces implemented in astro and used as types in apps using astro.
 
@@ -14,15 +14,7 @@ The purpose of the package is:
 ### Public libraries
 
 Each dart file directly under `lib/` is a public library that any package using
-`types_for_perception` can import.
-
-### Annotations
-
-We use Dart's `build` package to perform static metaprogramming in apps using `astro`.
-
-An app using astro adds `builders_for_perception` & `build_runner` as dev dependencies but
-annotations need to be added as a dependency (not a dev dependency) so they can be
-imported in the app code. So we put the annotations in a separate package (this package!)
+`abstractions` can import.
 
 ## Getting started
 
