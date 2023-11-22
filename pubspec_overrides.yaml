@@ -1,7 +1,7 @@
 dependency_overrides:
 # where are we? /flutter/utils/perception/<here>
-  # types_for_auth:
-  #   path: 
+  types_for_auth:
+    path: ../../../../dart/interfaces/types_for_auth
   # enspyr_lints:
   #   path: 
   # json_utils:
