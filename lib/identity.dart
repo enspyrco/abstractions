@@ -16,8 +16,10 @@ abstract interface class IdentitySubsystem {
       String email, String password);
   Future<UserAuthState> signInWithEmailAndPassword(
       String email, String password);
-  Future<UserAuthState> signInWithApple(
+  Future<UserAuthState> signInToAppleThenFirebase();
+  Future<UserAuthState> signInWithAppleCredential(
       {required String idToken, required String rawNonce});
+
   Future<UserAuthState> signInWithGoogle(
       {required String accessToken, required String idToken});
   Future<void> signOut();
